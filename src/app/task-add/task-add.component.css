@@ -1,11 +1,15 @@
-/* task-add.component.css */
 :host {
-  display: block;
+  display: flex;
+
+  align-items: center;
   margin-top: 20px;
+  height: 100vh; /* Wysokość ekranu */
+  flex-direction: column; /* Dzieci będą układane pionowo */
 }
 
 .p-field {
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-bottom: 10px;
 }

@@ -1,31 +1,13 @@
-/* app.component.css */
-
-body {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  margin: 0;
-  padding: 0;
+:host{
+  max-width: 1000px;
+  margin: 50px auto;
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-nav {
-  display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  background-color: #3f51b5;
-  color: white;
-  padding: 1em 0;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 1em;
+h1{
+  text-align: center;
+
+  margin: 20px 0;
 }
-
-nav a.router-link-active {
-  border-bottom: 2px solid white;
-}
-
-

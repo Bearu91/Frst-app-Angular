@@ -18,6 +18,8 @@ import { MessagesModule } from "primeng/messages";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import {ToolbarModule} from "primeng/toolbar";
+import {TabMenuModule} from "primeng/tabmenu";
 
 
 @NgModule({
@@ -26,7 +28,7 @@ import { MessageService } from 'primeng/api';
     TasksListComponent,
     TaskAddComponent,
     TaskDetailComponent,
-    // TaskDeleteComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -42,9 +44,12 @@ import { MessageService } from 'primeng/api';
     MenubarModule,
     MessageModule,
     MessagesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToolbarModule,
+    TabMenuModule,
+
   ],
-  providers: [ConfirmationService,MessageService,],
+  providers: [ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

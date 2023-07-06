@@ -1,6 +1,15 @@
-<h2 class="task-detail-title">Task Detail</h2>
-<div *ngIf="task" class="task-detail-content">
-  <h3 class="task-detail-name">{{task.name}}</h3>
-  <h3 class="task-detail-description">{{task.description}}</h3>
+<div class="task-detail-container">
+  <p-card>
+    <p-header>
+      <h2 class="task-detail-title">Task Detail</h2>
+    </p-header>
+    <div *ngIf="task">
+      <p-panel header="Name">
+        <div class="task-detail-name">{{task.name}}</div>
+      </p-panel>
+      <p-panel header="Description">
+        <div class="task-detail-description">{{task.description}}</div>
+      </p-panel>
+    </div>
+  </p-card>
 </div>
-<button pButton type="button" (click)="confirmTaskCompletion(task)" label="Potwierdź wykonanie" icon="pi pi-check" class="p-button-raised p-button-success"></button>

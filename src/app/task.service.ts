@@ -6,8 +6,8 @@ import { Task } from "./task-model";
 })
 export class TaskService {
   tasks:Task[] = [
-    { id: 1, name: 'Task 1', description: 'Opis zadania 1', completed: false },
-    { id: 2, name: 'Task 2', description: 'Opis zadania 2', completed: false },
+    { id: 1, name: 'Task 1', description: 'Opis zadania 1', done: false },
+    { id: 2, name: 'Task 2', description: 'Opis zadania 2', done: false },
   ];
 
   constructor() {}
@@ -32,5 +32,11 @@ export class TaskService {
 
   deleteTask(taskId: number) {
     this.tasks = this.tasks.filter(task => task.id !== taskId);
+  }
+  setTaskDone(id: number) {
+    const task = this.tasks.find(t => t.id === id);
+    if (task) {
+      task.done = true;
+    }
   }
 }

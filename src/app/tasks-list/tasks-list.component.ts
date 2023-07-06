@@ -10,7 +10,7 @@ import { Task } from "../task-model";
 export class TasksListComponent {
   tasks = this.taskService.getTasks();
   selectedTask: any;
-  private router: any;
+
 
   constructor(private taskService: TaskService) {}
 
@@ -18,7 +18,12 @@ export class TasksListComponent {
      this.taskService.deleteTask(task.id);
     this.tasks = this.taskService.getTasks();
 
-    this.router.navigate(['/tasks']);
+
   }
+  markTaskAsDone(task: Task) {
+    this.taskService.setTaskDone(task.id);
+    this.tasks = this.taskService.getTasks();
+  }
+
 
 }

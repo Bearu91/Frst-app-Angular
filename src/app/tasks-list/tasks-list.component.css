@@ -1,3 +1,13 @@
+:host {
+  display: flex;
+  justify-content: center;
+
+  height: 100vh;
+}
+
+.task-list-container {
+  text-align: center;
+}
 .task-item {
   display: inline-block;
   padding: 10px;
@@ -14,3 +24,12 @@ p-header h2 {
   margin-left: 20px;
   margin-top: 5px;
 }
+
+.task-name {
+  display: inline-block;
+}
+.task-icon-container {
+  display: inline-block;
+  margin-right: 10px;
+}
+
