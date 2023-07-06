@@ -1,1 +1,6 @@
-<p>task-detail works!</p>
+<h2 class="task-detail-title">Task Detail</h2>
+<div *ngIf="task" class="task-detail-content">
+  <h3 class="task-detail-name">{{task.name}}</h3>
+  <h3 class="task-detail-description">{{task.description}}</h3>
+</div>
+<button pButton type="button" (click)="confirmTaskCompletion(task)" label="Potwierdź wykonanie" icon="pi pi-check" class="p-button-raised p-button-success"></button>

@@ -6,8 +6,8 @@ import { Task } from "./task-model";
 })
 export class TaskService {
   tasks:Task[] = [
-    { id: 1, name: 'Task 1', description: 'Opis zadania 1' },
-    { id: 2, name: 'Task 2', description: 'Opis zadania 2' },
+    { id: 1, name: 'Task 1', description: 'Opis zadania 1', completed: false },
+    { id: 2, name: 'Task 2', description: 'Opis zadania 2', completed: false },
   ];
 
   constructor() {}

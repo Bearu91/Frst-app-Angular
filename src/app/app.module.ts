@@ -16,6 +16,8 @@ import { MenubarModule } from "primeng/menubar";
 import { MessageModule } from "primeng/message";
 import { MessagesModule } from "primeng/messages";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -42,7 +44,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     MessagesModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ConfirmationService,MessageService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

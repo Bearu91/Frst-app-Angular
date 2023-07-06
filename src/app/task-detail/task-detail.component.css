@@ -1,0 +1,38 @@
+.task-detail-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.task-detail-content {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.task-detail-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.task-detail-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.p-button-success {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.p-button-success:hover {
+  background-color: #45a049;
+}
