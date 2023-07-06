@@ -1,0 +1,17 @@
+  <p-card>
+    <p-header>
+      <h2>Task List</h2>
+    </p-header>
+  </p-card>
+  <p-listbox [options]="tasks" optionLabel="name" [(ngModel)]="selectedTask">
+    <ng-template let-task pTemplate="item">
+      <div class="p-clearfix task-item">
+        <a routerLink="/detail/{{task.id}}">{{task.name}}</a>
+      </div>
+      <div class="task-actions">
+        <button class="p-button p-button-sm p-button-secondary" (click)="deleteTask(task)">
+          <i class="pi pi-trash"></i> Usuń
+        </button>
+      </div>
+    </ng-template>
+  </p-listbox>

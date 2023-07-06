@@ -1,0 +1,25 @@
+/* task-add.component.css */
+:host {
+  display: block;
+  margin-top: 20px;
+}
+
+.p-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.p-field label {
+  min-width: 120px;
+  margin-right: 10px;
+}
+
+.p-inputtext,
+.p-inputtextarea {
+  flex: 1;
+}
+
+.p-button {
+  margin-top: 10px;
+}

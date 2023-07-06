@@ -1,0 +1,16 @@
+.task-item {
+  display: inline-block;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+p-header h2 {
+  color: #3f51b5;
+  font-size: 24px;
+  margin-bottom: 0;
+}
+.task-actions {
+  margin-left: 20px;
+  margin-top: 5px;
+}
