@@ -27,7 +27,8 @@ import {TabMenuModule} from "primeng/tabmenu";
     AppComponent,
     TasksListComponent,
     TaskAddComponent,
-    TaskDetailComponent,
+    TaskDetailComponent
+
 
   ],
   imports: [
@@ -47,6 +48,7 @@ import {TabMenuModule} from "primeng/tabmenu";
     BrowserAnimationsModule,
     ToolbarModule,
     TabMenuModule,
+
 
   ],
   providers: [ConfirmationService, MessageService],

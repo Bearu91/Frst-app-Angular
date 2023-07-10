@@ -39,4 +39,12 @@ export class TaskService {
       task.done = true;
     }
   }
+  // w task.service.ts
+  updateTask(id: number, updatedTask: Task) {
+    const index = this.tasks.findIndex(task => task.id === id);
+    if (index > -1) {
+      this.tasks[index] = updatedTask;
+    }
+  }
+
 }
