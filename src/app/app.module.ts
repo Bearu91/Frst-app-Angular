@@ -20,7 +20,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import {ToolbarModule} from "primeng/toolbar";
 import {TabMenuModule} from "primeng/tabmenu";
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import {TabMenuModule} from "primeng/tabmenu";
     BrowserAnimationsModule,
     ToolbarModule,
     TabMenuModule,
+    HttpClientModule
 
   ],
   providers: [ConfirmationService, MessageService],

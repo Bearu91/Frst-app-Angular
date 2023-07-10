@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from "primeng/api";
+import {Task} from "./task-model";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { MenuItem } from "primeng/api";
 })
 export class AppComponent {
   items!: MenuItem[];
-  title: any;
+  title!: string;
 
 
   ngOnInit() {

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskService } from '../task.service';
-import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 import { Task } from "../task-model";
 
 @Component({
@@ -16,9 +14,7 @@ export class TaskDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private taskService: TaskService,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private taskService: TaskService
   ) {}
 
   ngOnInit() {
@@ -26,15 +22,17 @@ export class TaskDetailComponent implements OnInit {
   }
 
   getTask() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    const task = this.taskService.getTask(id);
-    if (task) {
-      this.task = task;
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.taskService.getTask(id).subscribe(task => {
+        if (task) {
+          this.task = task;
+        } else {
+          // Obsłuż błąd, gdy zadanie nie zostanie znalezione
+        }
+      });
     } else {
-      // Obsłuż błąd, gdy zadanie nie zostanie znalezione
+      // Obsłuż błąd, gdy brakuje identyfikatora zadania
     }
   }
-
-
-
 }

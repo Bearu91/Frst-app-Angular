@@ -1,42 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Task } from "./task-model";
+import {NewTask, Task} from "./task-model";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  tasks:Task[] = [
-    { id: 1, name: 'Task 1', description: 'Opis zadania 1', done: false },
-    { id: 2, name: 'Task 2', description: 'Opis zadania 2', done: false },
-  ];
+  private apiEndPoint='https://crudcrud.com/api/93f02abe382f4921a4c4c93d22c92779/unicorns'
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getTasks() {
-    return this.tasks;
+  getTasks():Observable<Task[]> {
+    return this.http.get<Task[]>(this.apiEndPoint);
   }
 
-  getTask(id: number) {
-    return this.tasks.find(task => task.id === id);
+  getTask(id: string):Observable<Task> {
+    return this.http.get<Task>(`${this.apiEndPoint}/${id}`);
   }
 
-  generateId(): number {
-    // Logika generowania unikalnego identyfikatora
-    const maxId = this.tasks.reduce((prev, curr) => (curr.id > prev ? curr.id : prev), 0);
-    return maxId + 1;
+
+
+  updateTask(id: string, task: Task):Observable<Task> {
+    return this.http.put<Task>(`${this.apiEndPoint}/${id}`, {name: task.name, description: task.description, done: task.done});
+  }
+  deleteTask(id: string):Observable<Object> {
+    return this.http.delete(`${this.apiEndPoint}${id}`);
+  }
+  addTask(task: NewTask): Observable<Task> {
+    return this.http.post<Task>(`${this.apiEndPoint}`, task);
   }
 
-  addTask(newTask: any) {
-    this.tasks.push(newTask);
-  }
 
-  deleteTask(taskId: number) {
-    this.tasks = this.tasks.filter(task => task.id !== taskId);
-  }
-  setTaskDone(id: number) {
-    const task = this.tasks.find(t => t.id === id);
-    if (task) {
-      task.done = true;
-    }
-  }
 }

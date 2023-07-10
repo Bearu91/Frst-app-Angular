@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskService } from '../task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {NewTask, Task} from "../task-model";
 
 @Component({
   selector: 'app-task-add',
@@ -22,21 +23,24 @@ export class TaskAddComponent {
     });
   }
 
+
   onSubmit() {
     if (this.taskForm.valid) {
       const title = this.taskForm.get('title')?.value;
       const description = this.taskForm.get('description')?.value;
 
-      const newTask: any = {
-        id: this.taskService.generateId(),
+      const newTask: NewTask = {
         name: title,
-        description: description
+        description: description,
       };
 
-      this.taskService.addTask(newTask);
-      this.router.navigate(['/tasks']).then(() => {
-        // Code to execute after navigation is complete
+      this.taskService.addTask(newTask).subscribe((addedTask: Task) => {
+        this.router.navigate(['/tasks']).then(() => {
+          // Code to execute after navigation is complete
+        });
       });
     }
+
+
   }
 }
