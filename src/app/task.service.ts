@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root',
 })
 export class TaskService {
-  private apiEndPoint='https://crudcrud.com/api/93f02abe382f4921a4c4c93d22c92779/todo'
+  private apiEndPoint='https://crudcrud.com/api/59170280aa4b45cdbe1b27e8611fe716/todo'
 
   constructor(private http: HttpClient) {}
 
@@ -15,17 +15,18 @@ export class TaskService {
     return this.http.get<Task[]>(this.apiEndPoint);
   }
 
-  getTask(_id: string):Observable<Task> {
-    return this.http.get<Task>(`${this.apiEndPoint}/${_id}`);
+  getTask(id: string):Observable<Task> {
+    return this.http.get<Task>(`${this.apiEndPoint}/${id}`);
   }
 
 
 
-  updateTask({ _id, title, description, done }: Task){
-    this.http.put(`${this.apiEndPoint}/${_id}`, {title, description, done}).subscribe()
+  updateTask({ _id, title, description, done }: Task) :Observable<Task> {
+   return this.http.put<Task>(`${this.apiEndPoint}/${_id}`, {title, description, done})
+
   }
   deleteTask(id: string):Observable<Object> {
-    return this.http.delete(`${this.apiEndPoint}${id}`);
+    return this.http.delete(`${this.apiEndPoint}/${id}`);
   }
   addTask(newTask: Task): Observable<Task> {
     return this.http.post<Task>(`${this.apiEndPoint}`, newTask);

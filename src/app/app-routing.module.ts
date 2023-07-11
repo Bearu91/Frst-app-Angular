@@ -9,8 +9,9 @@ const routes: Routes = [
   { path: 'tasks', component: TasksListComponent },
   { path: 'add', component: TaskAddComponent },
   { path: 'detail/:id', component: TaskDetailComponent },
-  { path: '**', redirectTo: '/tasks' },
   { path: 'detail/:id/edit', component: TaskAddComponent },
+  { path: '**', redirectTo: 'tasks' }
+
 ];
 
 @NgModule({

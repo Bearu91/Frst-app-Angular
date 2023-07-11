@@ -11,8 +11,8 @@
           <i [ngClass]="task.done ? 'pi pi-check' : 'pi pi-times'" [ngStyle]="{ color: task.done ? 'green' : 'red' }" class="task-icon"></i>
         </div>
         <div class="task-name">
-        <a [routerLink]="['/detail', task.id]">
-          {{ task.name }}
+        <a [routerLink]="['/detail/'+ task._id]">
+          {{ task.title }}
         </a>
       </div>
         <div class="task-actions">
@@ -20,7 +20,8 @@
             <i class="pi pi-trash"></i> Usuń
           </button>
           <p-button
-            [routerLink]="['/detail/' + task.id + '/edit']" [state]="task"
+            [routerLink]="['/detail/' + task._id + '/edit']"
+            [state]="{task}"
             icon="pi pi-file-edit"
             styleClass="p-button-rounded p-button-text p-button-raised"
             title="Edit"

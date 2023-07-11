@@ -34,5 +34,7 @@ export class TasksListComponent implements OnInit {
   // }
 
 
-
+  editTask(_id: string) {
+    this.router.navigate([`/detail/${_id}/edit`])
+  }
 }
