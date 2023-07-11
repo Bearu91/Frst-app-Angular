@@ -1,10 +1,7 @@
 export interface Task {
-  id: string;
-  name: string;
+  _id?: string;
+  title: string;
   description: string;
   done: boolean;
 }
-export interface NewTask {
-  name: string;
-  description: string;
-}
+

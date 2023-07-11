@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
 import { Task } from "../task-model";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-tasks-list',
@@ -9,8 +9,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-  tasks: Task[] = [];
-  selectedTask!: Task;
+  tasks!: Task[];
+
 
 
   constructor(private taskService: TaskService, private router: Router) {}
@@ -23,15 +23,16 @@ export class TasksListComponent implements OnInit {
     this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
   }
 
-  deleteTask(task: Task): void {
-    this.taskService.deleteTask(task.id).subscribe(() => {
-      this.tasks = this.tasks.filter(t => t !== task);
+  deleteTask(id: string): void {
+    this.taskService.deleteTask(id).subscribe((): void => {
+      this.tasks = this.tasks.filter(t => t._id !== id);
     });
   }
 
-  updateTask(task: Task): void {
-    this.taskService.updateTask(task.id, task).subscribe();
-  }
+  // updateTask(task: Task){
+  //   this.taskService.updateTask(task).subscribe();
+  // }
+
 
 
 }

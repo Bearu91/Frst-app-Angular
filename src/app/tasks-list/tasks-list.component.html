@@ -4,7 +4,7 @@
       <h2>Task List</h2>
     </p-header>
   </p-card>
-  <p-listbox [options]="tasks" optionLabel="name" [(ngModel)]="selectedTask">
+  <p-listbox [options]="tasks" optionLabel="name">
     <ng-template let-task pTemplate="item">
       <div class="p-clearfix task-item">
         <div class="task-icon-container">
@@ -16,13 +16,15 @@
         </a>
       </div>
         <div class="task-actions">
-          <button class="p-button p-button-sm p-button-secondary" (click)="deleteTask(task)">
+          <button class="p-button p-button-sm p-button-secondary" (click)="deleteTask(task._id)">
             <i class="pi pi-trash"></i> Usuń
           </button>
-          <!-- Dodajemy nowy przycisk, który po kliknięciu oznacza zadanie jako wykonane. -->
-          <button class="p-button p-button-sm p-button-success" (click)="updateTask(task)">
-            <i class="pi pi-check"></i> Zmodyfikuj
-          </button>
+          <p-button
+            [routerLink]="['/detail/' + task.id + '/edit']" [state]="task"
+            icon="pi pi-file-edit"
+            styleClass="p-button-rounded p-button-text p-button-raised"
+            title="Edit"
+          ></p-button>
         </div>
       </div>
     </ng-template>

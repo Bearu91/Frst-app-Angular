@@ -21,6 +21,7 @@ import { MessageService } from 'primeng/api';
 import {ToolbarModule} from "primeng/toolbar";
 import {TabMenuModule} from "primeng/tabmenu";
 import { HttpClientModule } from '@angular/common/http';
+import { TaskEditComponent } from './task-edit/task-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     TasksListComponent,
     TaskAddComponent,
     TaskDetailComponent,
+    TaskEditComponent,
 
   ],
   imports: [

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {NewTask, Task} from "./task-model";
+import {Task} from "./task-model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root',
 })
 export class TaskService {
-  private apiEndPoint='https://crudcrud.com/api/93f02abe382f4921a4c4c93d22c92779/unicorns'
+  private apiEndPoint='https://crudcrud.com/api/93f02abe382f4921a4c4c93d22c92779/todo'
 
   constructor(private http: HttpClient) {}
 
@@ -15,20 +15,20 @@ export class TaskService {
     return this.http.get<Task[]>(this.apiEndPoint);
   }
 
-  getTask(id: string):Observable<Task> {
-    return this.http.get<Task>(`${this.apiEndPoint}/${id}`);
+  getTask(_id: string):Observable<Task> {
+    return this.http.get<Task>(`${this.apiEndPoint}/${_id}`);
   }
 
 
 
-  updateTask(id: string, task: Task):Observable<Task> {
-    return this.http.put<Task>(`${this.apiEndPoint}/${id}`, {name: task.name, description: task.description, done: task.done});
+  updateTask({ _id, title, description, done }: Task){
+    this.http.put(`${this.apiEndPoint}/${_id}`, {title, description, done}).subscribe()
   }
   deleteTask(id: string):Observable<Object> {
     return this.http.delete(`${this.apiEndPoint}${id}`);
   }
-  addTask(task: NewTask): Observable<Task> {
-    return this.http.post<Task>(`${this.apiEndPoint}`, task);
+  addTask(newTask: Task): Observable<Task> {
+    return this.http.post<Task>(`${this.apiEndPoint}`, newTask);
   }
 
 
