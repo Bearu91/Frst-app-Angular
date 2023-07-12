@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
 import { Task } from "../task-model";
 import { Router } from "@angular/router";
+import {Dictionary} from "../dictionary-model";
 
 @Component({
   selector: 'app-tasks-list',
@@ -9,7 +10,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-  tasks!: Task[];
+  tasks: Dictionary[] = [];
 
 
 
@@ -25,7 +26,7 @@ export class TasksListComponent implements OnInit {
 
   deleteTask(id: string): void {
     this.taskService.deleteTask(id).subscribe((): void => {
-      this.tasks = this.tasks.filter(t => t._id !== id);
+      this.tasks = this.tasks.filter(t => t.id !== id);
     });
   }
 
@@ -34,7 +35,7 @@ export class TasksListComponent implements OnInit {
   // }
 
 
-  editTask(_id: string) {
-    this.router.navigate([`/detail/${_id}/edit`])
-  }
+  // editTask(_id: string) {
+  //   this.router.navigate([`/detail/${_id}/edit`])
+  // }
 }

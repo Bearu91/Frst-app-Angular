@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Task} from "./task-model";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
+import {Dictionary} from "./dictionary-model";
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,10 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  getTasks():Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiEndPoint);
+  getTasks(): Observable<Dictionary[]> {
+    return this.http.get<Task[]>(this.apiEndPoint).pipe(
+      map(tasks => tasks.map(task => ({ id: task._id, label: task.title } as Dictionary)))
+    );
   }
 
   getTask(id: string):Observable<Task> {
