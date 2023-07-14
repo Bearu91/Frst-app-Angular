@@ -9,7 +9,7 @@ import {Task} from "./task-model";
 })
 export class AppComponent {
   items!: MenuItem[];
-  title!: string;
+
 
 
   ngOnInit() {

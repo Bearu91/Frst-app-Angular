@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
 import { TaskService } from '../task.service';
-import { Task } from '../task-model';
+import {Task, TaskEditDTO} from '../task-model';
+import {ActivatedRoute} from "@angular/router";
 @Component({
   selector: 'app-task-add',
   templateUrl: './task-add.component.html',
@@ -18,14 +19,25 @@ export class TaskAddComponent implements OnInit {
     description: '',
   });
 
-  constructor(private tasksService: TaskService, private fb: FormBuilder) {}
+  constructor(private tasksService: TaskService, private fb: FormBuilder,private route: ActivatedRoute,) {}
 
   ngOnInit() {
-    this.task = history.state.task;
+    /// pobrac adres id z adresu aktualnego url, jesli brak jest adresu ip to utworz nowy obiekt if else getTask
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id){
+      this.getTask(id)
+    } else {
+    this.task = {
+    _id: '',
+    title: '',
+    description: '',
+    done: false,
+  }
+}
+
     console.log(this.task)
 
-    // check if task is passed to state
-    if (this.task.title) {
+    if (this.task && this.task.title) {
       this.taskForm.setValue({
         title: this.task.title,
         description: this.task.description,
@@ -61,7 +73,7 @@ export class TaskAddComponent implements OnInit {
       this.task.description = this.taskForm.value.description ?? '';
       this.tasksService.updateTask(this.task).subscribe();
     } else {
-      const newTask: Task = {
+      const newTask: TaskEditDTO = {
         title: this.taskForm.value.title ?? '',
         description: this.taskForm.value.description ?? '',
         done: false,
@@ -85,5 +97,21 @@ export class TaskAddComponent implements OnInit {
   onInputChange(): void {
     this.messages = [];
     this.isSubmitted = false;
+  }
+
+  getTask(id: string) {
+    this.tasksService.getTask(id).subscribe(
+      task => {
+        this.task = task;
+        this.taskForm.setValue({
+          title: this.task.title,
+          description: this.task.description,
+        });
+        this.isEditMode = true;
+      },
+      error => {
+          return "sorry your task is missing"
+      }
+    );
   }
 }

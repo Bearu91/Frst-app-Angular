@@ -1,22 +1,33 @@
 import { Injectable } from '@angular/core';
-import {Task} from "./task-model";
+import {Task, TaskEditDTO} from "./task-model";
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable, switchMap, tap} from "rxjs";
 import {Dictionary} from "./dictionary-model";
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private apiEndPoint='https://crudcrud.com/api/59170280aa4b45cdbe1b27e8611fe716/todo'
+  private apiEndPoint='https://crudcrud.com/api/b1172eb244544d1a8235e9c0477389b8/todo'
+  private taskList = new BehaviorSubject<Dictionary[]>([]);
 
   constructor(private http: HttpClient) {}
 
-  getTasks(): Observable<Dictionary[]> {
-    return this.http.get<Task[]>(this.apiEndPoint).pipe(
-      map(tasks => tasks.map(task => ({ id: task._id, label: task.title } as Dictionary)))
-    );
+  fetchDictionaries() {
+    this.http.get<Task[]>(this.apiEndPoint).pipe(
+      map(tasks => tasks.map(task => ({id: task._id, label: task.title}))),
+      tap(dictionaries => this.taskList.next(dictionaries))  // aktualizuj wartość BehaviorSubject
+    ).subscribe();
   }
+  getTasks():Observable<Task[]> {
+    return this.http.get<Task[]>(this.apiEndPoint);
+  }
+
+  getDictionaries() : Observable<Dictionary[]>{
+    return this.taskList.asObservable()
+  };
+
 
   getTask(id: string):Observable<Task> {
     return this.http.get<Task>(`${this.apiEndPoint}/${id}`);
@@ -31,7 +42,7 @@ export class TaskService {
   deleteTask(id: string):Observable<Object> {
     return this.http.delete(`${this.apiEndPoint}/${id}`);
   }
-  addTask(newTask: Task): Observable<Task> {
+  addTask(newTask: TaskEditDTO): Observable<Task> {
     return this.http.post<Task>(`${this.apiEndPoint}`, newTask);
   }
 

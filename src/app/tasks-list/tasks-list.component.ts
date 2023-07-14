@@ -10,7 +10,7 @@ import {Dictionary} from "../dictionary-model";
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-  tasks: Dictionary[] = [];
+  tasks: Dictionary[] =[]
 
 
 
@@ -21,7 +21,8 @@ export class TasksListComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
+    this.taskService.fetchDictionaries();
+    this.taskService.getDictionaries().subscribe(tasks => this.tasks = tasks);
   }
 
   deleteTask(id: string): void {
