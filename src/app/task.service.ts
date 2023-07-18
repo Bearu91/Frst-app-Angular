@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Task, TaskEditDTO} from "./task-model";
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, map, Observable, switchMap, tap} from "rxjs";
+import {BehaviorSubject, map, Observable, tap} from "rxjs";
 import {Dictionary} from "./dictionary-model";
+import { Store, select } from '@ngrx/store';
+import * as actions from './app.actions';
+import { AppState } from './app.state';
 
 
 @Injectable({
@@ -10,24 +13,23 @@ import {Dictionary} from "./dictionary-model";
 })
 export class TaskService {
   private apiEndPoint='https://crudcrud.com/api/b1172eb244544d1a8235e9c0477389b8/todo'
-  private taskList = new BehaviorSubject<Dictionary[]>([]);
+  // private taskList = new BehaviorSubject<Dictionary[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
 
-  fetchDictionaries() {
-    this.http.get<Task[]>(this.apiEndPoint).pipe(
-      map(tasks => tasks.map(task => ({id: task._id, label: task.title}))),
-      tap(dictionaries => this.taskList.next(dictionaries))  // aktualizuj wartość BehaviorSubject
-    ).subscribe();
+
+  fetchDictionaries(): Observable<Dictionary[]> {
+    return this.http.get<Task[]>(this.apiEndPoint).pipe(
+      map(tasks => tasks.map(task => ({id: task._id, label: task.title})))
+    );
   }
-  getTasks():Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiEndPoint);
+  // getTasks():Observable<Task[]> {
+  //   return this.http.get<Task[]>(this.apiEndPoint);
+  // }
+
+  getDictionaries(): Observable<Dictionary[]> {
+    return this.store.pipe(select(state => state.dictionaries));
   }
-
-  getDictionaries() : Observable<Dictionary[]>{
-    return this.taskList.asObservable()
-  };
-
 
   getTask(id: string):Observable<Task> {
     return this.http.get<Task>(`${this.apiEndPoint}/${id}`);

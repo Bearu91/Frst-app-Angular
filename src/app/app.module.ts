@@ -22,6 +22,10 @@ import {ToolbarModule} from "primeng/toolbar";
 import {TabMenuModule} from "primeng/tabmenu";
 import { HttpClientModule } from '@angular/common/http';
 import { TaskEditComponent } from './task-edit/task-edit.component';
+import {AppEffects} from "./app.effects";
+import {EffectsModule} from "@ngrx/effects";
+import {appReducer} from "./app.reducer";
+import {StoreModule} from "@ngrx/store";
 
 @NgModule({
   declarations: [
@@ -49,7 +53,9 @@ import { TaskEditComponent } from './task-edit/task-edit.component';
     BrowserAnimationsModule,
     ToolbarModule,
     TabMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({ app: appReducer }),
+    EffectsModule.forRoot([AppEffects])
 
   ],
   providers: [ConfirmationService, MessageService],

@@ -4,7 +4,7 @@
       <h2>Task List</h2>
     </p-header>
   </p-card>
-  <p-listbox [options]="tasks" optionLabel="name">
+  <p-listbox *ngFor="let task of tasks$ | async"  optionLabel="name">
     <ng-template let-task pTemplate="item">
       <div class="p-clearfix task-item">
         <div class="task-icon-container">

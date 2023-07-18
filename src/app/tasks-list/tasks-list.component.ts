@@ -3,6 +3,10 @@ import { TaskService } from '../task.service';
 import { Task } from "../task-model";
 import { Router } from "@angular/router";
 import {Dictionary} from "../dictionary-model";
+import {AppState} from "../app.state";
+import { Store } from '@ngrx/store';
+import * as actions from '../app.actions';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-tasks-list',
@@ -10,33 +14,29 @@ import {Dictionary} from "../dictionary-model";
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-  tasks: Dictionary[] =[]
+  tasks$: Observable<Dictionary[]>;
 
-
-
-  constructor(private taskService: TaskService, private router: Router) {}
+  constructor(private taskService: TaskService, private router: Router, private store: Store<AppState>) { this.tasks$ = this.store.select(state => state.dictionaries)}
 
   ngOnInit() {
-    this.getTasks();
+    this.store.dispatch(actions.loadDictionaries());
+    this.tasks$ = this.taskService.getDictionaries();
   }
 
   getTasks(): void {
-    this.taskService.fetchDictionaries();
-    this.taskService.getDictionaries().subscribe(tasks => this.tasks = tasks);
+    this.tasks$ = this.store.select(state => state.dictionaries);
   }
-
   deleteTask(id: string): void {
-    this.taskService.deleteTask(id).subscribe((): void => {
-      this.tasks = this.tasks.filter(t => t.id !== id);
-    });
+    this.store.dispatch(actions.deleteTask({ id }));
   }
 
-  // updateTask(task: Task){
-  //   this.taskService.updateTask(task).subscribe();
-  // }
-
-
-  // editTask(_id: string) {
-  //   this.router.navigate([`/detail/${_id}/edit`])
-  // }
 }
+
+// updateTask(task: Task){
+//   this.taskService.updateTask(task).subscribe();
+// }
+
+
+// editTask(_id: string) {
+//   this.router.navigate([`/detail/${_id}/edit`])
+// }
