@@ -6,13 +6,14 @@ import {Dictionary} from "./dictionary-model";
 import { Store, select } from '@ngrx/store';
 import * as actions from './app.actions';
 import { AppState } from './app.state';
+import {selectTaskList} from "./selectors";
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private apiEndPoint='https://crudcrud.com/api/b1172eb244544d1a8235e9c0477389b8/todo'
+  private apiEndPoint='https://crudcrud.com/api/1edc0a58008c49d090d940778be56d01/todo'
   // private taskList = new BehaviorSubject<Dictionary[]>([]);
 
   constructor(private http: HttpClient, private store: Store<AppState>) {}
@@ -28,7 +29,12 @@ export class TaskService {
   // }
 
   getDictionaries(): Observable<Dictionary[]> {
-    return this.store.pipe(select(state => state.dictionaries));
+    return this.store.pipe(
+      select(
+        selectTaskList
+      ),
+      map(dictionaries => { console.log(dictionaries);return dictionaries})
+    )
   }
 
   getTask(id: string):Observable<Task> {

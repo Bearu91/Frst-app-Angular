@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {isDevMode, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -27,6 +27,8 @@ import {EffectsModule} from "@ngrx/effects";
 import {appReducer} from "./app.reducer";
 import {StoreModule} from "@ngrx/store";
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +56,8 @@ import {StoreModule} from "@ngrx/store";
     ToolbarModule,
     TabMenuModule,
     HttpClientModule,
-    StoreModule.forRoot({ app: appReducer }),
+    StoreModule.forFeature('dictionaries' , appReducer),
+    StoreModule.forRoot(),
     EffectsModule.forRoot([AppEffects])
 
   ],

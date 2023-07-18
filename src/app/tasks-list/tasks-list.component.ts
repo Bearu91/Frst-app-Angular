@@ -14,9 +14,9 @@ import {Observable} from "rxjs";
   styleUrls: ['./tasks-list.component.css']
 })
 export class TasksListComponent implements OnInit {
-  tasks$: Observable<Dictionary[]>;
+  tasks$!: Observable<Dictionary[]>;
 
-  constructor(private taskService: TaskService, private router: Router, private store: Store<AppState>) { this.tasks$ = this.store.select(state => state.dictionaries)}
+  constructor(private taskService: TaskService, private router: Router, private store: Store<AppState>) {}
 
   ngOnInit() {
     this.store.dispatch(actions.loadDictionaries());
@@ -27,7 +27,7 @@ export class TasksListComponent implements OnInit {
     this.tasks$ = this.store.select(state => state.dictionaries);
   }
   deleteTask(id: string): void {
-    this.store.dispatch(actions.deleteTask({ id }));
+    this.store.dispatch(actions.deleteTask({_id: id }));
   }
 
 }

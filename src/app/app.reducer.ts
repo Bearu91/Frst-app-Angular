@@ -10,11 +10,11 @@ export const initialState: AppState = {
 
 export const appReducer = createReducer(
   initialState,
-  on(loadDictionariesSuccess, (state, action) => ({ ...state, dictionaries: action.dictionaries })),
+  on(loadDictionariesSuccess, (state, action) => {  return ({ ...state, dictionaries: action.dictionaries })}),
   on(deleteTaskSuccess, (state, action) => {
   return {
     ...state,
-    dictionaries: state.dictionaries.filter(dict => dict.id !== action.id)
+    dictionaries: state.dictionaries.filter(dict => dict.id !== action._id)
   };
 })
 );
